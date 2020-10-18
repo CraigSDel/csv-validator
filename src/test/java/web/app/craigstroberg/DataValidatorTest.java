@@ -52,7 +52,7 @@ public class DataValidatorTest {
 
     private List<ColumnValidator> getSingleStringValidator() {
         return List.of(ColumnValidator.builder()
-                .columnValidationType(ColumnValidationType.STRING)
+                .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                 .build());
     }
 }
