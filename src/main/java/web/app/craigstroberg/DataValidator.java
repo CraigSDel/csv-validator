@@ -22,7 +22,7 @@ public class DataValidator {
     private final String delimiter;
     private final Boolean firstRowIsHeader;
 
-    public boolean validate(List<String> csvData) throws ValidationException {
+    public List<String> validateCsvDataReturningFailures(List<String> csvData) throws ValidationException {
         if (isColumnValidationFieldsNullOrEmpty()) {
             throw new ValidationException(VALIDATION_FIELDS_CAN_NOT_BE_EMPTY);
         }
@@ -38,7 +38,7 @@ public class DataValidator {
         return validateCsvData(csvData);
     }
 
-    private boolean validateCsvData(List<String> csvData) {
+    private List<String> validateCsvData(List<String> csvData) {
         List<String> failures = new ArrayList();
         if (delimiter == null || delimiter.isBlank()) {
             throw new ValidationException(PLEASE_CONFIGURE_A_DELIMITER);
@@ -53,12 +53,7 @@ public class DataValidator {
                 failures.add(currentLine + e.getMessage());
             }
         });
-        if (failures.size() == 0) {
-            return Boolean.TRUE;
-        } else {
-            System.out.println("Number of failures " + failures.size() + " / " + csvData.size());
-            return Boolean.FALSE;
-        }
+        return failures;
     }
 
     private boolean isCsvColumnSizeEqualToTheAmountOfColumnValidators(List<String> csvData) {

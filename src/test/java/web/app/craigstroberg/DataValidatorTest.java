@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +21,7 @@ public class DataValidatorTest {
             DataValidator dataValidator = DataValidator.builder()
                     .columnValidators(List.of(ColumnValidator.builder().build()))
                     .build();
-            dataValidator.validate(new ArrayList<>());
+            dataValidator.validateCsvDataReturningFailures(new ArrayList<>());
         });
     }
 
@@ -30,7 +31,7 @@ public class DataValidatorTest {
             DataValidator dataValidator = DataValidator.builder()
                     .columnValidators(getSingleStringValidator())
                     .build();
-            dataValidator.validate(new ArrayList<>());
+            dataValidator.validateCsvDataReturningFailures(new ArrayList<>());
         });
     }
 
@@ -41,7 +42,7 @@ public class DataValidatorTest {
             DataValidator dataValidator = DataValidator.builder()
                     .columnValidators(columnValidators)
                     .build();
-            dataValidator.validate(new ArrayList<>());
+            dataValidator.validateCsvDataReturningFailures(new ArrayList<>());
         });
     }
 
@@ -51,7 +52,7 @@ public class DataValidatorTest {
             DataValidator dataValidator = DataValidator.builder()
                     .columnValidators(new ArrayList<>())
                     .build();
-            dataValidator.validate(List.of("Column One"));
+            dataValidator.validateCsvDataReturningFailures(List.of("Column One"));
         });
     }
 
@@ -64,7 +65,7 @@ public class DataValidatorTest {
                 .firstRowIsHeader(Boolean.TRUE)
                 .delimiter(",")
                 .build();
-        assertTrue(dataValidator.validate(getFile()));
+        assertEquals(0, dataValidator.validateCsvDataReturningFailures(getFile()).size());
     }
 
     private ArrayList<ColumnValidator> getColumnValidators() {
