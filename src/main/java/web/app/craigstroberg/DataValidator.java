@@ -37,8 +37,8 @@ public class DataValidator {
             throw new ValidationException("Please configure a delimiter.");
         }
         csvData.stream().forEach(s -> {
-            List<String> lineData = Arrays.asList(s.split("(?:" + delimiter + "|\\n|^)(\"(?:(?:\"\")*[^\"]*)*\"|[^\"" + delimiter + "\\n]*|(?:\\n|$))"));
-            for (int i = 0; i < lineData.size(); i++) {
+            List<String> lineData = Arrays.asList(s.split(",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"));
+            for (int i = 0; i < columnValidators.size(); i++) {
                 columnValidators.get(i).validate(lineData.get(i));
             }
         });
