@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,20 +39,26 @@ public class DataValidator {
     }
 
     private boolean validateCsvData(List<String> csvData) {
+        List<String> failures = new ArrayList();
         if (delimiter == null || delimiter.isBlank()) {
             throw new ValidationException(PLEASE_CONFIGURE_A_DELIMITER);
         }
-        csvData.stream().forEach(s -> {
-            List<String> lineData = Arrays.asList(s.split(REGEX_FOR_SPLITTING_CSV_DATA));
+        csvData.stream().forEach(currentLine -> {
+            List<String> lineData = Arrays.asList(currentLine.split(REGEX_FOR_SPLITTING_CSV_DATA));
             try {
                 for (int i = 0; i < columnValidators.size(); i++) {
                     columnValidators.get(i).validate(lineData.get(i));
                 }
             } catch (Exception e) {
-                throw new ValidationException(s, e);
+                failures.add(currentLine + e.getMessage());
             }
         });
-        return Boolean.TRUE;
+        if (failures.size() == 0) {
+            return Boolean.TRUE;
+        } else {
+            System.out.println("Number of failures " + failures.size() + " / " + csvData.size());
+            return Boolean.FALSE;
+        }
     }
 
     private boolean isCsvColumnSizeEqualToTheAmountOfColumnValidators(List<String> csvData) {
