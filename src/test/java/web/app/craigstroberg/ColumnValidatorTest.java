@@ -13,14 +13,15 @@ public class ColumnValidatorTest {
     public static final String TESTING_A_BLANK_STRING = "Testing a blank string";
     public static final String TESTING_THE_CREATION_OF_A_INTEGER = "Testing the creation of a integer";
     public static final String NUMBER = "1002";
+    public static final String TESTING_THAT_THE_FIELD_IS_A_STRING = "Testing that the field is a string";
 
     @Test
     public void createValidationField() {
         ColumnValidator columnValidator = ColumnValidator.builder()
-                .description("Testing that the field is a string")
+                .description(TESTING_THAT_THE_FIELD_IS_A_STRING)
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                 .build();
-        assertEquals("Testing that the field is a string", columnValidator.getDescription());
+        assertEquals(TESTING_THAT_THE_FIELD_IS_A_STRING, columnValidator.getDescription());
         assertEquals(ColumnValidationType.STRING_NOT_BLANK, columnValidator.getColumnValidationType());
     }
 
