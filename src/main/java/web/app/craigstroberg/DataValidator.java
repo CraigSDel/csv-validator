@@ -38,8 +38,12 @@ public class DataValidator {
         }
         csvData.stream().forEach(s -> {
             List<String> lineData = Arrays.asList(s.split(",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"));
-            for (int i = 0; i < columnValidators.size(); i++) {
-                columnValidators.get(i).validate(lineData.get(i));
+            try {
+                for (int i = 0; i < columnValidators.size(); i++) {
+                    columnValidators.get(i).validate(lineData.get(i));
+                }
+            } catch (Exception e) {
+                throw new ValidationException(s, e);
             }
         });
         return Boolean.TRUE;
