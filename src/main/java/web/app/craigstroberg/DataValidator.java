@@ -12,10 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 public class DataValidator {
 
-    public static final boolean TRUE = true;
-    public static final boolean FALSE = false;
     private final List<ColumnValidator> columnValidators;
     private final String delimiter;
+    private final Boolean firstRowIsHeader;
 
     public boolean validate(List<String> csvData) throws ValidationException {
         if (isColumnValidationFieldsNullOrEmpty()) {
@@ -24,40 +23,46 @@ public class DataValidator {
         if (isCsvDataNullOrEmpty(csvData)) {
             throw new ValidationException("Csv data can not be empty");
         }
-        if (doesCsvColumnSizeEqualAmountOfColumnValidators(csvData)) {
+        if (!isCsvColumnSizeEqualToTheAmountOfColumnValidators(csvData)) {
             throw new ValidationException("Number of column validators do not match the csv columns");
+        }
+        if (firstRowIsHeader) {
+            csvData.remove(0);
         }
         return validateCsvData(csvData);
     }
 
     private boolean validateCsvData(List<String> csvData) {
+        if (delimiter == null || delimiter.isBlank()) {
+            throw new ValidationException("Please configure a delimiter.");
+        }
         csvData.stream().forEach(s -> {
-            List<String> lineData = Arrays.asList(s.split(delimiter));
+            List<String> lineData = Arrays.asList(s.split("(?:" + delimiter + "|\\n|^)(\"(?:(?:\"\")*[^\"]*)*\"|[^\"" + delimiter + "\\n]*|(?:\\n|$))"));
             for (int i = 0; i < lineData.size(); i++) {
                 columnValidators.get(i).validate(lineData.get(i));
             }
         });
-        return TRUE;
+        return Boolean.TRUE;
     }
 
-    private boolean doesCsvColumnSizeEqualAmountOfColumnValidators(List<String> csvData) {
-        if (columnValidators.size() != csvData.size()) {
-            return TRUE;
+    private boolean isCsvColumnSizeEqualToTheAmountOfColumnValidators(List<String> csvData) {
+        if (csvData.get(0).split(delimiter).length == columnValidators.size()) {
+            return Boolean.TRUE;
         }
-        return FALSE;
+        return Boolean.FALSE;
     }
 
     private boolean isCsvDataNullOrEmpty(List<String> csvData) {
         if (csvData == null || csvData.isEmpty()) {
-            return FALSE;
+            return Boolean.TRUE;
         }
-        return TRUE;
+        return Boolean.FALSE;
     }
 
     private boolean isColumnValidationFieldsNullOrEmpty() {
         if (columnValidators == null || columnValidators.isEmpty()) {
-            return FALSE;
+            return Boolean.TRUE;
         }
-        return TRUE;
+        return Boolean.FALSE;
     }
 }

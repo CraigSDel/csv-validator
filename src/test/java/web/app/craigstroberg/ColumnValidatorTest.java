@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ColumnValidatorTest {
 
@@ -29,7 +30,7 @@ public class ColumnValidatorTest {
                 .description(TESTING_A_BLANK_STRING)
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                 .build();
-        assertEquals(true, testing_a_blank_string.validate("I am not a blank string Jan"));
+        assertTrue(testing_a_blank_string.validate("I am not a blank string Jan"));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class ColumnValidatorTest {
                     .description(TESTING_THE_CREATION_OF_A_INTEGER)
                     .columnValidationType(ColumnValidationType.INTEGER)
                     .build();
-            assertEquals(true, testing_a_blank_string.validate(NUMBER));
+            assertTrue(testing_a_blank_string.validate(NUMBER));
     }
 
     @Test
