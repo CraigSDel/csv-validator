@@ -18,17 +18,17 @@ public class ColumnValidatorTest {
     @Test
     public void createValidationField() {
         ColumnValidator columnValidator = ColumnValidator.builder()
-                .description(TESTING_THAT_THE_FIELD_IS_A_STRING)
+                .columnDescription(TESTING_THAT_THE_FIELD_IS_A_STRING)
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                 .build();
-        assertEquals(TESTING_THAT_THE_FIELD_IS_A_STRING, columnValidator.getDescription());
+        assertEquals(TESTING_THAT_THE_FIELD_IS_A_STRING, columnValidator.getColumnDescription());
         assertEquals(ColumnValidationType.STRING_NOT_BLANK, columnValidator.getColumnValidationType());
     }
 
     @Test
     public void validateAValidString() {
         ColumnValidator testing_a_blank_string = ColumnValidator.builder()
-                .description(TESTING_A_BLANK_STRING)
+                .columnDescription(TESTING_A_BLANK_STRING)
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                 .build();
         assertTrue(testing_a_blank_string.validate("I am not a blank string Jan"));
@@ -38,7 +38,7 @@ public class ColumnValidatorTest {
     public void invalidString() {
         assertThrows(ValidationException.class, () -> {
             ColumnValidator testing_a_blank_string = ColumnValidator.builder()
-                    .description(TESTING_A_BLANK_STRING)
+                    .columnDescription(TESTING_A_BLANK_STRING)
                     .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
                     .build();
             testing_a_blank_string.validate(FOUR_SPACES + TWO_TABS);
@@ -48,7 +48,7 @@ public class ColumnValidatorTest {
     @Test
     public void validInteger() {
             ColumnValidator testing_a_blank_string = ColumnValidator.builder()
-                    .description(TESTING_THE_CREATION_OF_A_INTEGER)
+                    .columnDescription(TESTING_THE_CREATION_OF_A_INTEGER)
                     .columnValidationType(ColumnValidationType.INTEGER)
                     .build();
             assertTrue(testing_a_blank_string.validate(NUMBER));
@@ -58,7 +58,7 @@ public class ColumnValidatorTest {
     public void invalidInteger() {
         assertThrows(ValidationException.class, () -> {
             ColumnValidator testing_a_blank_string = ColumnValidator.builder()
-                    .description(TESTING_THE_CREATION_OF_A_INTEGER)
+                    .columnDescription(TESTING_THE_CREATION_OF_A_INTEGER)
                     .columnValidationType(ColumnValidationType.INTEGER)
                     .build();
             testing_a_blank_string.validate(NUMBER + TESTING_THE_CREATION_OF_A_INTEGER);

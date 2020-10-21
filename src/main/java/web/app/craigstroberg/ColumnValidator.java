@@ -14,7 +14,8 @@ public class ColumnValidator {
     public static final String EXCEPTION = " Exception : ";
     public static final String VALIDATION_TYPE = " Validation Type ";
     public static final String FIELD_REQUIRES_A_VALIDATION_PATTERN = "Field requires a validation pattern ";
-    private String description;
+    public static final String COLUMN = " Column ";
+    private String columnDescription;
     private ColumnValidationType columnValidationType;
     private String validationPattern;
 
@@ -36,21 +37,26 @@ public class ColumnValidator {
 
     /**
      * Example date pattern "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+     *
      * @param item
      */
     private void date(String item) {
         if (validationPattern == null || validationPattern.isBlank()) {
-            throw new ValidationException(FIELD_REQUIRES_A_VALIDATION_PATTERN + item);
+            throw new ValidationException(FIELD_REQUIRES_A_VALIDATION_PATTERN + item
+                    + COLUMN + columnDescription);
         }
         try {
             DateTimeFormatter.ofPattern(validationPattern);
         } catch (Exception exception) {
-            throw new ValidationException(ITEM_FAILED_VALIDATION + item + EXCEPTION + exception);
+            throw new ValidationException(ITEM_FAILED_VALIDATION + item
+                    + EXCEPTION + exception
+                    + COLUMN + columnDescription);
         }
     }
 
     /**
      * pattern regex example: ^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+     *
      * @param item
      */
     private void link(String item) {
@@ -59,7 +65,8 @@ public class ColumnValidator {
         }
         boolean matches = item.matches(validationPattern);
         if (!matches) {
-            throw new ValidationException(ITEM_FAILED_VALIDATION + item);
+            throw new ValidationException(ITEM_FAILED_VALIDATION + item
+                    + COLUMN + columnDescription);
         }
     }
 
@@ -67,13 +74,17 @@ public class ColumnValidator {
         try {
             new BigInteger(item);
         } catch (NumberFormatException numberFormatException) {
-            throw new ValidationException(ITEM_FAILED_VALIDATION + item + EXCEPTION + numberFormatException.getMessage());
+            throw new ValidationException(ITEM_FAILED_VALIDATION + item
+                    + EXCEPTION + numberFormatException.getMessage()
+                    + COLUMN + columnDescription);
         }
     }
 
     private void stringNotBlank(String item) {
         if (item == null || item.isBlank()) {
-            throw new ValidationException(ITEM_FAILED_VALIDATION + item + VALIDATION_TYPE + columnValidationType.getDescription());
+            throw new ValidationException(ITEM_FAILED_VALIDATION + item
+                    + VALIDATION_TYPE + columnValidationType.getDescription()
+                    + COLUMN + columnDescription);
         }
     }
 }

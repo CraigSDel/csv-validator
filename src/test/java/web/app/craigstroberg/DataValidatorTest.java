@@ -71,99 +71,99 @@ public class DataValidatorTest {
         ArrayList<ColumnValidator> columnValidators = new ArrayList<>();
         ColumnValidator video_id = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("video_id")
+                .columnDescription("video_id")
                 .build();
         columnValidators.add(video_id);
 
         ColumnValidator trending_date = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("trending_date")
+                .columnDescription("trending_date")
                 .build();
         columnValidators.add(trending_date);
 
         ColumnValidator title = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("title")
+                .columnDescription("title")
                 .build();
         columnValidators.add(title);
 
         ColumnValidator channel_title = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("channel_title")
+                .columnDescription("channel_title")
                 .build();
         columnValidators.add(channel_title);
 
         ColumnValidator category_id = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.INTEGER)
-                .description("category_id")
+                .columnDescription("category_id")
                 .build();
         columnValidators.add(category_id);
 
         ColumnValidator publish_time = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.DATE)
-                .description("publish_time")
+                .columnDescription("publish_time")
                 .validationPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .build();
         columnValidators.add(publish_time);
 
         ColumnValidator tags = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("tags")
+                .columnDescription("tags")
                 .build();
         columnValidators.add(tags);
 
         ColumnValidator views = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("views")
+                .columnDescription("views")
                 .build();
         columnValidators.add(views);
 
         ColumnValidator likes = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("likes")
+                .columnDescription("likes")
                 .build();
         columnValidators.add(likes);
 
         ColumnValidator dislikes = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("dislikes")
+                .columnDescription("dislikes")
                 .build();
         columnValidators.add(dislikes);
 
         ColumnValidator comment_count = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("comment_count")
+                .columnDescription("comment_count")
                 .build();
         columnValidators.add(comment_count);
 
         ColumnValidator thumbnail_link = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.LINK)
-                .description("thumbnail_link")
+                .columnDescription("thumbnail_link")
                 .validationPattern("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")
                 .build();
         columnValidators.add(thumbnail_link);
 
         ColumnValidator comments_disabled = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("comments_disabled")
+                .columnDescription("comments_disabled")
                 .build();
         columnValidators.add(comments_disabled);
 
         ColumnValidator ratings_disabled = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("ratings_disabled")
+                .columnDescription("ratings_disabled")
                 .build();
         columnValidators.add(ratings_disabled);
 
         ColumnValidator video_error_or_removed = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("video_error_or_removed")
+                .columnDescription("video_error_or_removed")
                 .build();
         columnValidators.add(video_error_or_removed);
 
         ColumnValidator description = ColumnValidator.builder()
                 .columnValidationType(ColumnValidationType.STRING_NOT_BLANK)
-                .description("description")
+                .columnDescription("description")
                 .build();
         columnValidators.add(description);
 
