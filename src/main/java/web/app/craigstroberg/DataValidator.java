@@ -1,8 +1,9 @@
 package web.app.craigstroberg;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import web.app.craigstroberg.exception.ValidationException;
+import web.app.craigstroberg.validators.ValidatorStrategy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 public class DataValidator {
 
     public static final String PLEASE_CONFIGURE_A_DELIMITER = "Please configure a delimiter.";
@@ -18,7 +18,7 @@ public class DataValidator {
     public static final String NUMBER_OF_COLUMN_VALIDATORS_DO_NOT_MATCH_THE_CSV_COLUMNS = "Number of column validators do not match the csv columns";
     public static final String CSV_DATA_CAN_NOT_BE_EMPTY = "Csv data can not be empty";
     public static final String VALIDATION_FIELDS_CAN_NOT_BE_EMPTY = "Validation fields can not be empty";
-    private final List<ColumnValidator> columnValidators;
+    private final List<ValidatorStrategy> columnValidators;
     private final String delimiter;
     private final Boolean firstRowIsHeader;
 

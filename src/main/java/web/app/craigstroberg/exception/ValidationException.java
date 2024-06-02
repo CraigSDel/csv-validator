@@ -1,4 +1,4 @@
-package web.app.craigstroberg;
+package web.app.craigstroberg.exception;
 
 public class ValidationException extends RuntimeException {
     public ValidationException(String message) {

@@ -1,4 +1,4 @@
-package web.app.craigstroberg;
+package web.app.craigstroberg.enums;
 
 public enum ColumnValidationType {
     STRING_NOT_BLANK("String must not be empty or blank"),
