@@ -1,6 +1,6 @@
 package web.app.craigstroberg.validators;
 
-public interface ValidatorStrategy {
+public interface Validator {
 
     String ITEM_FAILED_VALIDATION = "Item failed validation : ";
     String EXCEPTION = " Exception : ";

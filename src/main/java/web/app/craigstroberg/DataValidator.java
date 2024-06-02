@@ -3,7 +3,7 @@ package web.app.craigstroberg;
 import lombok.Builder;
 import lombok.Data;
 import web.app.craigstroberg.exception.ValidationException;
-import web.app.craigstroberg.validators.ValidatorStrategy;
+import web.app.craigstroberg.validators.Validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +18,7 @@ public class DataValidator {
     public static final String NUMBER_OF_COLUMN_VALIDATORS_DO_NOT_MATCH_THE_CSV_COLUMNS = "Number of column validators do not match the csv columns";
     public static final String CSV_DATA_CAN_NOT_BE_EMPTY = "Csv data can not be empty";
     public static final String VALIDATION_FIELDS_CAN_NOT_BE_EMPTY = "Validation fields can not be empty";
-    private final List<ValidatorStrategy> columnValidators;
+    private final List<Validator> columnValidators;
     private final String delimiter;
     private final Boolean firstRowIsHeader;
 

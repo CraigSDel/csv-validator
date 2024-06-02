@@ -2,18 +2,18 @@ package web.app.craigstroberg.validators;
 
 import lombok.Builder;
 import lombok.Data;
-import web.app.craigstroberg.exception.ValidationException;
 import web.app.craigstroberg.enums.ColumnValidationType;
+import web.app.craigstroberg.exception.ValidationException;
 
 import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
-public class DateValidator implements ValidatorStrategy {
+public class DateValidator implements Validator {
 
     private final ColumnValidationType columnValidationType = ColumnValidationType.DATE;
-    private String columnDescription;
-    private String validationPattern;
+    private final String columnDescription;
+    private final String validationPattern;
 
     @Override
     public boolean validate(String value) {
@@ -23,7 +23,7 @@ public class DateValidator implements ValidatorStrategy {
         }
         try {
             DateTimeFormatter.ofPattern(validationPattern);
-            return true;
+            return Boolean.TRUE;
         } catch (Exception exception) {
             throw new ValidationException(ITEM_FAILED_VALIDATION + value
                     + EXCEPTION + exception

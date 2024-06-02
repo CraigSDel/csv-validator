@@ -2,16 +2,16 @@ package web.app.craigstroberg.validators;
 
 import lombok.Builder;
 import lombok.Data;
-import web.app.craigstroberg.exception.ValidationException;
 import web.app.craigstroberg.enums.ColumnValidationType;
+import web.app.craigstroberg.exception.ValidationException;
 
 @Data
 @Builder
-public class LinkValidator implements ValidatorStrategy {
+public class LinkValidator implements Validator {
 
     private final ColumnValidationType columnValidationType = ColumnValidationType.LINK;
-    private String columnDescription;
-    private String validationPattern;
+    private final String columnDescription;
+    private final String validationPattern;
 
     @Override
     public boolean validate(String value) {
@@ -23,7 +23,7 @@ public class LinkValidator implements ValidatorStrategy {
             throw new ValidationException(ITEM_FAILED_VALIDATION + value
                     + COLUMN + columnDescription);
         } else {
-            return true;
+            return Boolean.TRUE;
         }
     }
 }
