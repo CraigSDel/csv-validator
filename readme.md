@@ -18,7 +18,7 @@ This Java project provides a dynamic CSV data validation tool. It allows you to 
 2. Build the project:
 
     ```bash
-        cd csv-data-validator
+        cd csv-validator
         mvn clean install
     ```
 
